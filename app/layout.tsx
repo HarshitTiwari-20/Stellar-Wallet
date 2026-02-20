@@ -6,14 +6,20 @@ export const metadata: Metadata = {
   description: 'Build a beautiful payment dashboard on Stellar blockchain',
 };
 
+import { AppProviders } from './providers';
+
 export default function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <body>{children}</body>
+    <html lang="en" suppressHydrationWarning>
+      <body>
+        <AppProviders>
+          {children}
+        </AppProviders>
+      </body>
     </html>
   );
 }
