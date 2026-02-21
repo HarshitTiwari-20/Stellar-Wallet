@@ -8,6 +8,7 @@
 'use client';
 
 import { useState } from 'react';
+import { useTheme } from '@/app/ThemeContext';
 
 // Example: Loading Spinner
 export function LoadingSpinner() {
@@ -21,12 +22,12 @@ export function LoadingSpinner() {
 }
 
 // Example: Balance Card
-export function BalanceCard({ 
-  balance, 
-  label 
-}: { 
-  balance: string; 
-  label: string; 
+export function BalanceCard({
+  balance,
+  label
+}: {
+  balance: string;
+  label: string;
 }) {
   return (
     <div className="bg-gradient-to-br from-blue-500 to-purple-600 rounded-xl p-6 shadow-lg">
@@ -52,20 +53,22 @@ export function TransactionItem({
   hash: string;
   explorerLink: string;
 }) {
+  const { isDark } = useTheme();
+
   return (
     <div className="bg-white/5 hover:bg-white/10 rounded-lg p-4 transition-colors">
       <div className="flex justify-between items-start mb-2">
         <div>
-          <p className="text-white font-semibold">
+          <p className={`font-semibold ${isDark ? 'text-white' : 'text-gray-900'}`}>
             {type === 'payment' ? '💸' : '📝'} {type}
           </p>
           {amount && (
-            <p className="text-white/80">
+            <p className={isDark ? 'text-white/80' : 'text-gray-900/80'}>
               {amount} {asset || 'XLM'}
             </p>
           )}
         </div>
-        
+
         <a
           href={explorerLink}
           target="_blank"
@@ -75,7 +78,7 @@ export function TransactionItem({
           View →
         </a>
       </div>
-      <div className="flex justify-between text-xs text-white/50">
+      <div className={`flex justify-between text-xs ${isDark ? 'text-white/50' : 'text-gray-900/50'}`}>
         <span>{new Date(date).toLocaleString()}</span>
         <span className="font-mono">{hash.slice(0, 8)}...</span>
       </div>
@@ -142,10 +145,13 @@ export function Card({
   title?: string;
   children: React.ReactNode;
 }) {
+  const { isDark } = useTheme();
+
   return (
-    <div className="bg-white/10 backdrop-blur-lg rounded-2xl p-6 shadow-2xl">
+    <div className={`bg-white/10 backdrop-blur-lg rounded-2xl p-6 shadow-2xl ${isDark ? 'text-white' : 'text-gray-900'
+      }`}>
       {title && (
-        <h2 className="text-2xl font-bold text-white mb-4">{title}</h2>
+        <h2 className="text-2xl font-bold mb-4">{title}</h2>
       )}
       {children}
     </div>
@@ -168,15 +174,17 @@ export function Input({
   onChange: (value: string) => void;
   error?: string;
 }) {
+  const { isDark } = useTheme();
+
   return (
     <div>
-      <label className="block text-white/80 text-sm mb-2">{label}</label>
+      <label className={`block text-sm mb-2 ${isDark ? 'text-white/80' : 'text-gray-900/80'}`}>{label}</label>
       <input
         type={type}
         value={value}
         onChange={(e) => onChange(e.target.value)}
         placeholder={placeholder}
-        className="w-full bg-white/5 border border-white/20 rounded-lg px-4 py-3 text-white placeholder-white/40 focus:outline-none focus:border-white/40"
+        className={`w-full bg-white/5 border border-white/20 rounded-lg px-4 py-3 focus:outline-none focus:border-white/40 ${isDark ? 'text-white placeholder-white/40' : 'text-gray-900 placeholder-gray-500'}`}
       />
       {error && <p className="text-red-400 text-sm mt-1">{error}</p>}
     </div>
@@ -207,9 +215,7 @@ export function Button({
     <button
       onClick={onClick}
       disabled={disabled}
-      className={`${variants[variant]} ${
-        fullWidth ? 'w-full' : ''
-      } text-white font-bold py-3 px-6 rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed`}
+      className={`${variants[variant]} ${fullWidth ? 'w-full' : ''} font-bold py-3 px-6 rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed`}
     >
       {children}
     </button>
@@ -226,11 +232,14 @@ export function EmptyState({
   title: string;
   description: string;
 }) {
+  const { isDark } = useTheme();
+
   return (
-    <div className="text-center py-12">
+    <div className={`text-center py-12 ${isDark ? 'text-white' : 'text-gray-900'
+      }`}>
       <div className="text-6xl mb-4">{icon}</div>
-      <h3 className="text-white text-xl font-semibold mb-2">{title}</h3>
-      <p className="text-white/60">{description}</p>
+      <h3 className={`text-xl font-semibold mb-2 ${isDark ? 'text-white' : 'text-gray-900'}`}>{title}</h3>
+      <p className={isDark ? 'text-white/60' : 'text-gray-900/60'}>{description}</p>
     </div>
   );
 }

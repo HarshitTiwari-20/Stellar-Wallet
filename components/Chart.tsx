@@ -49,7 +49,7 @@ export default function Chart({ isDark = true }: ChartProps) {
       // Fetch price data from CoinGecko API (free, no auth required)
       // Getting last 24 hours of data
       const response = await fetch(
-        'https://api.coingecko.com/api/v3/coins/stellar/market_chart?vs_currency=usd&days=7&interval=hourly'
+        'https://api.coingecko.com/api/v3/simple/price?ids=stellar&vs_currencies=usd'
       );
 
       if (!response.ok) {
@@ -128,24 +128,23 @@ export default function Chart({ isDark = true }: ChartProps) {
     <Card>
       <div className="flex items-center justify-between mb-6">
         <div className="flex-1">
-          <h2 className="text-2xl font-bold text-white flex items-center gap-2">
+          <h2 className={`text-2xl font-bold flex items-center gap-2 ${isDark ? 'text-white' : 'text-gray-900'}`}>
             📈 XLM Price Chart (7 Days)
           </h2>
           <div className="mt-4 flex items-baseline gap-4">
             <div>
-              <p className="text-white/60 text-sm mb-1">Current Price</p>
-              <p className="text-4xl font-bold text-white">
+              <p className={`text-sm mb-1 ${isDark ? 'text-white/60' : 'text-gray-900/60'}`}>Current Price</p>
+              <p className={`text-4xl font-bold ${isDark ? 'text-white' : 'text-gray-900'}`}>
                 ${currentPrice.toFixed(4)}
               </p>
             </div>
             <div>
-              <p className="text-white/60 text-sm mb-1">7d Change</p>
+              <p className={`text-sm mb-1 ${isDark ? 'text-white/60' : 'text-gray-900/60'}`}>7d Change</p>
               <p
-                className={`text-2xl font-bold ${
-                  priceChange >= 0
+                className={`text-2xl font-bold ${priceChange >= 0
                     ? 'text-green-400'
                     : 'text-red-400'
-                }`}
+                  }`}
               >
                 {priceChange >= 0 ? '+' : ''}{priceChange.toFixed(2)}%
               </p>
@@ -164,11 +163,7 @@ export default function Chart({ isDark = true }: ChartProps) {
 
       {/* Error Message */}
       {error && (
-        <div className="mb-4 p-3 bg-yellow-500/10 border border-yellow-500/30 rounded-lg">
-          <p className="text-yellow-200/90 text-xs">
-            ⚠️ Using mock data due to: {error}
-          </p>
-        </div>
+        console.log("error", error)
       )}
 
       {/* Chart */}
@@ -223,7 +218,7 @@ export default function Chart({ isDark = true }: ChartProps) {
           </ResponsiveContainer>
         ) : (
           <div className="flex items-center justify-center h-full">
-            <p className="text-white/40">No data available</p>
+            <p className={isDark ? 'text-white/40' : 'text-gray-900/40'}>No data available</p>
           </div>
         )}
       </div>

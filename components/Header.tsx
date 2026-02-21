@@ -7,6 +7,9 @@ export default function Header() {
   const { isDark, toggleTheme } = useTheme();
 
   return (
+    <div className={`border-b backdrop-blur-sm transition-colors duration-300 ${
+                  isDark ? 'text-white' : 'text-gray-900'
+                }`}>
     <header
       className={`border-b backdrop-blur-sm transition-colors duration-300 ${
         isDark
@@ -30,7 +33,7 @@ export default function Header() {
               </h1>
               <p
                 className={`text-sm transition-colors duration-300 ${
-                  isDark ? 'text-white/60' : 'text-gray-600'
+                  isDark ? 'text-white/60' : 'text-gray-900'
                 }`}
               >
                 Testnet Payment Interface
@@ -46,19 +49,19 @@ export default function Header() {
               className={`text-sm transition-colors duration-300 ${
                 isDark
                   ? 'text-white/60 hover:text-white'
-                  : 'text-gray-600 hover:text-gray-900'
+                  : 'text-gray-900 hover:text-gray-900'
               }`}
             >
               About Stellar
             </a>
             <a
-              href="https://github.com"
+              href="https://github.com/stellar"
               target="_blank"
               rel="noopener noreferrer"
               className={`text-sm transition-colors duration-300 flex items-center gap-1 ${
                 isDark
                   ? 'text-white/60 hover:text-white'
-                  : 'text-gray-600 hover:text-gray-900'
+                  : 'text-gray-900 hover:text-gray-900'
               }`}
             >
               <Github size={16} /> GitHub
@@ -80,5 +83,6 @@ export default function Header() {
         </div>
       </div>
     </header>
+    </div>
   );
 }

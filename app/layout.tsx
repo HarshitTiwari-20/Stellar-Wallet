@@ -4,7 +4,7 @@ import { ThemeProvider } from './ThemeContext';
 
 export const metadata: Metadata = {
   title: 'Stellar Payment Dashboard',
-  description: 'Build a beautiful payment dashboard on Stellar blockchain',
+  description: 'Build a payment dashboard on Stellar blockchain',
 };
 
 export default function RootLayout({

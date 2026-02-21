@@ -61,7 +61,7 @@ export default function HomeContent() {
             </h2>
             <p
               className={`max-w-2xl mx-auto transition-colors duration-300 ${
-                isDark ? 'text-white/70' : 'text-gray-600'
+                isDark ? 'text-white/70' : 'text-gray-900'
               }`}
             >
               Connect your wallet to view your balance, send XLM payments, and track your transaction history.
@@ -106,8 +106,8 @@ export default function HomeContent() {
               <div
                 className={`backdrop-blur-lg rounded-xl p-6 border transition-colors duration-300 ${
                   isDark
-                    ? 'bg-white/5 border-white/10'
-                    : 'bg-white/80 border-gray-300/30'
+                    ? 'bg-white/5 border-white/10 text-white'
+                    : 'bg-white/80 border-gray-300/30 text-gray-900'
                 }`}
               >
                 <div className="text-3xl mb-3">⚡</div>
@@ -120,7 +120,7 @@ export default function HomeContent() {
                 </h3>
                 <p
                   className={`text-sm transition-colors duration-300 ${
-                    isDark ? 'text-white/60' : 'text-gray-600'
+                    isDark ? 'text-white/60' : 'text-gray-900'
                   }`}
                 >
                   Transactions settle in 3-5 seconds on Stellar network
@@ -144,7 +144,7 @@ export default function HomeContent() {
                 </h3>
                 <p
                   className={`text-sm transition-colors duration-300 ${
-                    isDark ? 'text-white/60' : 'text-gray-600'
+                    isDark ? 'text-white/60' : 'text-gray-900'
                   }`}
                 >
                   Transaction fees are just 0.00001 XLM (~$0.000001)
@@ -168,7 +168,7 @@ export default function HomeContent() {
                 </h3>
                 <p
                   className={`text-sm transition-colors duration-300 ${
-                    isDark ? 'text-white/60' : 'text-gray-600'
+                    isDark ? 'text-white/60' : 'text-gray-900'
                   }`}
                 >
                   Built on proven blockchain technology with wallet encryption
@@ -204,7 +204,7 @@ export default function HomeContent() {
               </h3>
               <p
                 className={`text-sm transition-colors duration-300 ${
-                  isDark ? 'text-white/60' : 'text-gray-600'
+                  isDark ? 'text-white/60' : 'text-gray-900'
                 }`}
               >
                 Choose any Stellar wallet: Freighter, xBull, Lobstr, Albedo, and more!
@@ -234,7 +234,7 @@ export default function HomeContent() {
               </h3>
               <p
                 className={`text-sm transition-colors duration-300 ${
-                  isDark ? 'text-white/60' : 'text-gray-600'
+                  isDark ? 'text-white/60' : 'text-gray-900'
                 }`}
               >
                 Click the connect button above and approve the connection request
@@ -264,7 +264,7 @@ export default function HomeContent() {
               </h3>
               <p
                 className={`text-sm transition-colors duration-300 ${
-                  isDark ? 'text-white/60' : 'text-gray-600'
+                  isDark ? 'text-white/60' : 'text-gray-900'
                 }`}
               >
                 Use Friendbot to fund your testnet account with free XLM
@@ -294,7 +294,7 @@ export default function HomeContent() {
               </h3>
               <p
                 className={`text-sm transition-colors duration-300 ${
-                  isDark ? 'text-white/60' : 'text-gray-600'
+                  isDark ? 'text-white/60' : 'text-gray-900'
                 }`}
               >
                 Send XLM payments and track your transactions in real-time
@@ -315,7 +315,7 @@ export default function HomeContent() {
         <div className="max-w-7xl mx-auto px-4 py-8">
           <div
             className={`text-center text-sm transition-colors duration-300 ${
-              isDark ? 'text-white/40' : 'text-gray-600'
+              isDark ? 'text-white/40' : 'text-gray-900'
             }`}
           >
             <p className="mb-2">

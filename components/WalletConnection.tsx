@@ -17,6 +17,7 @@ import { useState } from 'react';
 import { stellar } from '@/lib/stellar-helper';
 import { FaWallet, FaCopy, FaCheck } from 'react-icons/fa';
 import { MdLogout } from 'react-icons/md';
+import { useTheme } from '@/app/ThemeContext';
 import { Card } from './example-components';
 
 interface WalletConnectionProps {
@@ -25,6 +26,7 @@ interface WalletConnectionProps {
 }
 
 export default function WalletConnection({ onConnect, onDisconnect }: WalletConnectionProps) {
+  const { isDark } = useTheme();
   const [publicKey, setPublicKey] = useState<string>('');
   const [isConnected, setIsConnected] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -61,10 +63,10 @@ export default function WalletConnection({ onConnect, onDisconnect }: WalletConn
   if (!isConnected) {
     return (
       <Card title="🔐 Connect Your Wallet">
-        <p className="text-white/70 mb-6">
+        <p className={`mb-6 ${isDark ? 'text-white/70' : 'text-gray-900/70'}`}>
           Connect your Stellar wallet to view your balance and make transactions.
         </p>
-        
+
         <button
           onClick={handleConnect}
           disabled={loading}
@@ -84,10 +86,10 @@ export default function WalletConnection({ onConnect, onDisconnect }: WalletConn
         </button>
 
         <div className="mt-6 p-4 bg-blue-500/10 border border-blue-500/30 rounded-lg">
-          <p className="text-white/70 text-sm mb-3">
+          <p className={`text-sm mb-3 ${isDark ? 'text-white/70' : 'text-gray-900/70'}`}>
             💡 <strong>Supported Wallets</strong>
           </p>
-          <div className="grid grid-cols-2 gap-2 text-xs text-white/60">
+          <div className={`grid grid-cols-2 gap-2 text-xs ${isDark ? 'text-white/60' : 'text-gray-900/60'}`}>
             <div>✓ Freighter</div>
             <div>✓ xBull</div>
             <div>✓ Albedo</div>
@@ -97,7 +99,7 @@ export default function WalletConnection({ onConnect, onDisconnect }: WalletConn
             <div>✓ WalletConnect</div>
             <div>✓ More...</div>
           </div>
-          <p className="text-white/50 text-xs mt-3">
+          <p className={`text-xs mt-3 ${isDark ? 'text-white/50' : 'text-gray-900/50'}`}>
             Click "Connect Wallet" to choose your preferred wallet
           </p>
         </div>
@@ -110,7 +112,7 @@ export default function WalletConnection({ onConnect, onDisconnect }: WalletConn
       <div className="flex items-start justify-between mb-4">
         <div className="flex items-center gap-2">
           <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse"></div>
-          <span className="text-white/70 text-sm">Connected</span>
+          <span className={`text-sm ${isDark ? 'text-white/70' : 'text-gray-900/70'}`}>Connected</span>
         </div>
         <button
           onClick={handleDisconnect}
@@ -121,9 +123,9 @@ export default function WalletConnection({ onConnect, onDisconnect }: WalletConn
       </div>
 
       <div className="bg-white/5 rounded-xl p-4 border border-white/10">
-        <p className="text-white/60 text-xs mb-2">Your Address</p>
+        <p className={`text-xs mb-2 ${isDark ? 'text-white/60' : 'text-gray-900/60'}`}>Your Address</p>
         <div className="flex items-center justify-between gap-3">
-          <p className="text-white font-mono text-sm break-all">
+          <p className={`font-mono text-sm break-all ${isDark ? 'text-white' : 'text-gray-900'}`}>
             {publicKey}
           </p>
           <button

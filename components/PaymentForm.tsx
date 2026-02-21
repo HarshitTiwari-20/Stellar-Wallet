@@ -17,6 +17,7 @@
 import { useState } from 'react';
 import { stellar } from '@/lib/stellar-helper';
 import { FaPaperPlane, FaCheckCircle } from 'react-icons/fa';
+import { useTheme } from '@/app/ThemeContext';
 import { Card, Input, Button, Alert } from './example-components';
 
 interface PaymentFormProps {
@@ -25,6 +26,7 @@ interface PaymentFormProps {
 }
 
 export default function PaymentForm({ publicKey, onSuccess }: PaymentFormProps) {
+  const { isDark } = useTheme();
   const [recipient, setRecipient] = useState('');
   const [amount, setAmount] = useState('');
   const [memo, setMemo] = useState('');
@@ -61,7 +63,7 @@ export default function PaymentForm({ publicKey, onSuccess }: PaymentFormProps) 
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     if (!validateForm()) {
       return;
     }
@@ -84,7 +86,7 @@ export default function PaymentForm({ publicKey, onSuccess }: PaymentFormProps) 
           type: 'success',
           message: `Payment sent successfully! 🎉`,
         });
-        
+
         // Clear form
         setRecipient('');
         setAmount('');
@@ -99,7 +101,7 @@ export default function PaymentForm({ publicKey, onSuccess }: PaymentFormProps) 
     } catch (error: any) {
       console.error('Payment error:', error);
       let errorMessage = 'Failed to send payment. ';
-      
+
       if (error.message.includes('insufficient')) {
         errorMessage += 'Insufficient balance.';
       } else if (error.message.includes('destination')) {
@@ -119,7 +121,7 @@ export default function PaymentForm({ publicKey, onSuccess }: PaymentFormProps) 
 
   return (
     <Card>
-      <h2 className="text-2xl font-bold text-white mb-6 flex items-center gap-2">
+      <h2 className={`text-2xl font-bold mb-6 flex items-center gap-2 ${isDark ? 'text-white' : 'text-gray-900'}`}>
         <FaPaperPlane className="text-blue-400" />
         Send Payment
       </h2>
@@ -140,8 +142,8 @@ export default function PaymentForm({ publicKey, onSuccess }: PaymentFormProps) 
             <FaCheckCircle className="text-green-400 text-xl flex-shrink-0 mt-1" />
             <div className="flex-1">
               <p className="text-green-400 font-semibold mb-2">Transaction Confirmed!</p>
-              <p className="text-white/70 text-sm mb-2">Transaction Hash:</p>
-              <p className="text-white/90 text-xs font-mono break-all mb-3">{txHash}</p>
+              <p className={`text-sm mb-2 ${isDark ? 'text-white/70' : 'text-gray-900/70'}`}>Transaction Hash:</p>
+              <p className={`text-xs font-mono break-all mb-3 ${isDark ? 'text-white/90' : 'text-gray-900/90'}`}>{txHash}</p>
               <a
                 href={stellar.getExplorerLink(txHash, 'tx')}
                 target="_blank"
@@ -182,7 +184,7 @@ export default function PaymentForm({ publicKey, onSuccess }: PaymentFormProps) 
 
         <div className="pt-2">
           <Button
-            onClick={() => {}}
+            onClick={() => { }}
             variant="primary"
             disabled={loading}
             fullWidth
