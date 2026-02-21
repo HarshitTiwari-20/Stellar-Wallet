@@ -163,7 +163,7 @@ export default function Chart({ isDark = true }: ChartProps) {
 
       {/* Error Message */}
       {error && (
-        <div className="text-red-500 mb-4">{error}</div>
+        <div></div>
       )}
 
       {/* Chart */}
