@@ -142,8 +142,8 @@ export default function Chart({ isDark = true }: ChartProps) {
               <p className={`text-sm mb-1 ${isDark ? 'text-white/60' : 'text-gray-900/60'}`}>7d Change</p>
               <p
                 className={`text-2xl font-bold ${priceChange >= 0
-                    ? 'text-green-400'
-                    : 'text-red-400'
+                  ? 'text-green-400'
+                  : 'text-red-400'
                   }`}
               >
                 {priceChange >= 0 ? '+' : ''}{priceChange.toFixed(2)}%
@@ -163,7 +163,7 @@ export default function Chart({ isDark = true }: ChartProps) {
 
       {/* Error Message */}
       {error && (
-        console.log("error", error)
+        <div className="text-red-500 mb-4">{error}</div>
       )}
 
       {/* Chart */}
