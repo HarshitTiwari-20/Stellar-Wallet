@@ -144,7 +144,7 @@ export function TransactionConfirmation({
       <div className="bg-gray-900 rounded-2xl shadow-2xl max-w-md w-full border border-white/10">
         <div className="p-6">
           <h3 className="text-2xl font-bold text-white mb-4">Confirm Transaction</h3>
-
+          
           <div className="space-y-3 mb-6">
             <div className="bg-white/5 rounded-lg p-3">
               <p className="text-white/60 text-sm">Recipient</p>
@@ -180,9 +180,7 @@ export function TransactionConfirmation({
 // 6. Address Book (15 points)
 // ============================================
 export function AddressBook() {
-  /* eslint-disable @typescript-eslint/no-unused-vars */
   const [addresses, setAddresses] = useState<Array<{ name: string; address: string }>>([]);
-  /* eslint-enable @typescript-eslint/no-unused-vars */
   const [showAdd, setShowAdd] = useState(false);
 
   return (
@@ -219,7 +217,7 @@ export function AddressBook() {
       {addresses.length === 0 ? (
         <div className="text-center py-8 text-white/40">
           <p>No saved addresses yet</p>
-          <p className="text-sm mt-2">Click &quot;Add Address&quot; to get started</p>
+          <p className="text-sm mt-2">Click "Add Address" to get started</p>
         </div>
       ) : (
         <div className="space-y-2">

@@ -20,24 +20,40 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #000000;
-  color: #ffffff;
 }
 
-/* Custom scrollbar */
-::-webkit-scrollbar {
+/* Dark mode scrollbar */
+html.dark ::-webkit-scrollbar {
   width: 10px;
 }
 
-::-webkit-scrollbar-track {
+html.dark ::-webkit-scrollbar-track {
   background: rgba(255, 255, 255, 0.1);
 }
 
-::-webkit-scrollbar-thumb {
+html.dark ::-webkit-scrollbar-thumb {
   background: rgba(255, 255, 255, 0.3);
   border-radius: 5px;
 }
 
-::-webkit-scrollbar-thumb:hover {
+html.dark ::-webkit-scrollbar-thumb:hover {
   background: rgba(255, 255, 255, 0.5);
+}
+
+/* Light mode scrollbar */
+html:not(.dark) ::-webkit-scrollbar {
+  width: 10px;
+}
+
+html:not(.dark) ::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.05);
+}
+
+html:not(.dark) ::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
+}
+
+html:not(.dark) ::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 0, 0, 0.4);
 }

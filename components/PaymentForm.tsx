@@ -61,7 +61,7 @@ export default function PaymentForm({ publicKey, onSuccess }: PaymentFormProps) 
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-
+    
     if (!validateForm()) {
       return;
     }
@@ -84,7 +84,7 @@ export default function PaymentForm({ publicKey, onSuccess }: PaymentFormProps) 
           type: 'success',
           message: `Payment sent successfully! 🎉`,
         });
-
+        
         // Clear form
         setRecipient('');
         setAmount('');
@@ -96,17 +96,16 @@ export default function PaymentForm({ publicKey, onSuccess }: PaymentFormProps) 
           onSuccess();
         }
       }
-    } catch (error: unknown) {
+    } catch (error: any) {
       console.error('Payment error:', error);
       let errorMessage = 'Failed to send payment. ';
-
-      const err = error as Error;
-      if (err.message?.includes('insufficient')) {
+      
+      if (error.message.includes('insufficient')) {
         errorMessage += 'Insufficient balance.';
-      } else if (err.message?.includes('destination')) {
+      } else if (error.message.includes('destination')) {
         errorMessage += 'Invalid destination account.';
       } else {
-        errorMessage += err.message || 'Please try again.';
+        errorMessage += error.message || 'Please try again.';
       }
 
       setAlert({
@@ -183,7 +182,7 @@ export default function PaymentForm({ publicKey, onSuccess }: PaymentFormProps) 
 
         <div className="pt-2">
           <Button
-            onClick={() => { }}
+            onClick={() => {}}
             variant="primary"
             disabled={loading}
             fullWidth

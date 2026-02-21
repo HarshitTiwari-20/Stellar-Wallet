@@ -1,0 +1,146 @@
+
+> stellar-frontend-challenge@1.0.0 build
+> next build
+
+  ▲ Next.js 14.2.0
+
+   Creating an optimized production build ...
+ ⚠ Compiled with warnings
+
+./node_modules/require-addon/lib/runtime/bare.js
+Critical dependency: require function is used in a way in which dependencies cannot be statically extracted
+
+Import trace for requested module:
+./node_modules/require-addon/lib/runtime/bare.js
+./node_modules/require-addon/index.js
+./node_modules/sodium-native/index.js
+./node_modules/@stellar/stellar-sdk/node_modules/@stellar/stellar-base/lib/signing.js
+./node_modules/@stellar/stellar-sdk/node_modules/@stellar/stellar-base/lib/index.js
+./node_modules/@stellar/stellar-sdk/lib/index.js
+./lib/stellar-helper.ts
+./components/WalletConnection.tsx
+./components/HomeContent.tsx
+./app/page.tsx
+
+./node_modules/require-addon/lib/runtime/default.js
+Critical dependency: require function is used in a way in which dependencies cannot be statically extracted
+
+Import trace for requested module:
+./node_modules/require-addon/lib/runtime/default.js
+./node_modules/require-addon/index.js
+./node_modules/sodium-native/index.js
+./node_modules/@stellar/stellar-sdk/node_modules/@stellar/stellar-base/lib/signing.js
+./node_modules/@stellar/stellar-sdk/node_modules/@stellar/stellar-base/lib/index.js
+./node_modules/@stellar/stellar-sdk/lib/index.js
+./lib/stellar-helper.ts
+./components/WalletConnection.tsx
+./components/HomeContent.tsx
+./app/page.tsx
+
+./node_modules/require-addon/lib/runtime/node.js
+Critical dependency: require function is used in a way in which dependencies cannot be statically extracted
+
+Import trace for requested module:
+./node_modules/require-addon/lib/runtime/node.js
+./node_modules/require-addon/index.js
+./node_modules/sodium-native/index.js
+./node_modules/@stellar/stellar-sdk/node_modules/@stellar/stellar-base/lib/signing.js
+./node_modules/@stellar/stellar-sdk/node_modules/@stellar/stellar-base/lib/index.js
+./node_modules/@stellar/stellar-sdk/lib/index.js
+./lib/stellar-helper.ts
+./components/WalletConnection.tsx
+./components/HomeContent.tsx
+./app/page.tsx
+
+./node_modules/require-addon/lib/runtime/node.js
+Critical dependency: require function is used in a way in which dependencies cannot be statically extracted
+
+Import trace for requested module:
+./node_modules/require-addon/lib/runtime/node.js
+./node_modules/require-addon/index.js
+./node_modules/sodium-native/index.js
+./node_modules/@stellar/stellar-sdk/node_modules/@stellar/stellar-base/lib/signing.js
+./node_modules/@stellar/stellar-sdk/node_modules/@stellar/stellar-base/lib/index.js
+./node_modules/@stellar/stellar-sdk/lib/index.js
+./lib/stellar-helper.ts
+./components/WalletConnection.tsx
+./components/HomeContent.tsx
+./app/page.tsx
+
+./node_modules/require-addon/lib/runtime/node.js
+Critical dependency: the request of a dependency is an expression
+
+Import trace for requested module:
+./node_modules/require-addon/lib/runtime/node.js
+./node_modules/require-addon/index.js
+./node_modules/sodium-native/index.js
+./node_modules/@stellar/stellar-sdk/node_modules/@stellar/stellar-base/lib/signing.js
+./node_modules/@stellar/stellar-sdk/node_modules/@stellar/stellar-base/lib/index.js
+./node_modules/@stellar/stellar-sdk/lib/index.js
+./lib/stellar-helper.ts
+./components/WalletConnection.tsx
+./components/HomeContent.tsx
+./app/page.tsx
+
+./node_modules/sodium-native/index.js
+Critical dependency: require function is used in a way in which dependencies cannot be statically extracted
+
+Import trace for requested module:
+./node_modules/sodium-native/index.js
+./node_modules/@stellar/stellar-sdk/node_modules/@stellar/stellar-base/lib/signing.js
+./node_modules/@stellar/stellar-sdk/node_modules/@stellar/stellar-base/lib/index.js
+./node_modules/@stellar/stellar-sdk/lib/index.js
+./lib/stellar-helper.ts
+./components/WalletConnection.tsx
+./components/HomeContent.tsx
+./app/page.tsx
+
+ ✓ Compiled successfully
+   Linting and checking validity of types ...
+   Collecting page data ...
+   Generating static pages (0/4) ...
+   Generating static pages (1/4) 
+   Generating static pages (2/4) 
+   Generating static pages (3/4) 
+ReferenceError: window is not defined
+    at nf.isAvailable (/home/harshit/Desktop/stella/stellar-white-belt/stellar-white-belt-wallet-app/.next/server/app/page.js:1082:20143)
+    at /home/harshit/Desktop/stella/stellar-white-belt/stellar-white-belt-wallet-app/.next/server/app/page.js:1:26449
+    at Array.map (<anonymous>)
+    at e$.getSupportedWallets (/home/harshit/Desktop/stella/stellar-white-belt/stellar-white-belt-wallet-app/.next/server/app/page.js:1:26273)
+    at new e$ (/home/harshit/Desktop/stella/stellar-white-belt/stellar-white-belt-wallet-app/.next/server/app/page.js:1:26174)
+    at new n$ (/home/harshit/Desktop/stella/stellar-white-belt/stellar-white-belt-wallet-app/.next/server/app/page.js:1082:43930)
+    at 86997 (/home/harshit/Desktop/stella/stellar-white-belt/stellar-white-belt-wallet-app/.next/server/app/page.js:1082:45846)
+    at Object.t [as require] (/home/harshit/Desktop/stella/stellar-white-belt/stellar-white-belt-wallet-app/.next/server/webpack-runtime.js:1:143)
+    at require (/home/harshit/Desktop/stella/stellar-white-belt/stellar-white-belt-wallet-app/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:16:18270)
+    at I (/home/harshit/Desktop/stella/stellar-white-belt/stellar-white-belt-wallet-app/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:94362)
+Error: useTheme must be used within ThemeProvider
+    at s (/home/harshit/Desktop/stella/stellar-white-belt/stellar-white-belt-wallet-app/.next/server/app/page.js:1:3764)
+    at O5 (/home/harshit/Desktop/stella/stellar-white-belt/stellar-white-belt-wallet-app/.next/server/app/page.js:1098:3387)
+    at nj (/home/harshit/Desktop/stella/stellar-white-belt/stellar-white-belt-wallet-app/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:46251)
+    at nM (/home/harshit/Desktop/stella/stellar-white-belt/stellar-white-belt-wallet-app/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:47571)
+    at nN (/home/harshit/Desktop/stella/stellar-white-belt/stellar-white-belt-wallet-app/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:64546)
+    at nI (/home/harshit/Desktop/stella/stellar-white-belt/stellar-white-belt-wallet-app/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:47010)
+    at nM (/home/harshit/Desktop/stella/stellar-white-belt/stellar-white-belt-wallet-app/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:47717)
+    at nN (/home/harshit/Desktop/stella/stellar-white-belt/stellar-white-belt-wallet-app/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:64546)
+    at nI (/home/harshit/Desktop/stella/stellar-white-belt/stellar-white-belt-wallet-app/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:47010)
+    at nM (/home/harshit/Desktop/stella/stellar-white-belt/stellar-white-belt-wallet-app/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:47717) {
+  digest: '4274868405'
+}
+
+Error occurred prerendering page "/". Read more: https://nextjs.org/docs/messages/prerender-error
+
+Error: useTheme must be used within ThemeProvider
+    at s (/home/harshit/Desktop/stella/stellar-white-belt/stellar-white-belt-wallet-app/.next/server/app/page.js:1:3764)
+    at O5 (/home/harshit/Desktop/stella/stellar-white-belt/stellar-white-belt-wallet-app/.next/server/app/page.js:1098:3387)
+    at nj (/home/harshit/Desktop/stella/stellar-white-belt/stellar-white-belt-wallet-app/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:46251)
+    at nM (/home/harshit/Desktop/stella/stellar-white-belt/stellar-white-belt-wallet-app/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:47571)
+    at nN (/home/harshit/Desktop/stella/stellar-white-belt/stellar-white-belt-wallet-app/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:64546)
+    at nI (/home/harshit/Desktop/stella/stellar-white-belt/stellar-white-belt-wallet-app/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:47010)
+    at nM (/home/harshit/Desktop/stella/stellar-white-belt/stellar-white-belt-wallet-app/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:47717)
+    at nN (/home/harshit/Desktop/stella/stellar-white-belt/stellar-white-belt-wallet-app/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:64546)
+    at nI (/home/harshit/Desktop/stella/stellar-white-belt/stellar-white-belt-wallet-app/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:47010)
+    at nM (/home/harshit/Desktop/stella/stellar-white-belt/stellar-white-belt-wallet-app/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:47717)
+ ✓ Generating static pages (4/4)
+
+> Export encountered errors on following paths:
+	/page: /

@@ -1,12 +1,11 @@
 import type { Metadata } from 'next';
 import './globals.css';
+import { ThemeProvider } from './ThemeContext';
 
 export const metadata: Metadata = {
   title: 'Stellar Payment Dashboard',
   description: 'Build a beautiful payment dashboard on Stellar blockchain',
 };
-
-import { AppProviders } from './providers';
 
 export default function RootLayout({
   children,
@@ -16,9 +15,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body>
-        <AppProviders>
-          {children}
-        </AppProviders>
+        <ThemeProvider>{children}</ThemeProvider>
       </body>
     </html>
   );

@@ -1,114 +1,202 @@
-"use client";
+/**
+ * TransactionHistory Component
+ * 
+ * Displays recent transactions for the connected wallet
+ * 
+ * Features:
+ * - List recent transactions
+ * - Show: amount, from/to, date
+ * - Link to Stellar Expert for details
+ * - Empty state when no transactions
+ * - Loading state
+ * - Refresh functionality
+ */
 
-import { useEffect, useState } from "react";
-import { Horizon } from "@stellar/stellar-sdk";
-import { ArrowDownLeft, ArrowUpRight, ArrowRightLeft } from "lucide-react";
+'use client';
 
-const server = new Horizon.Server("https://horizon-testnet.stellar.org");
+import { useState, useEffect } from 'react';
+import { stellar } from '@/lib/stellar-helper';
+import { FaHistory, FaSync, FaArrowUp, FaArrowDown, FaExternalLinkAlt } from 'react-icons/fa';
+import { Card, EmptyState } from './example-components';
 
-export default function TransactionHistory({ publicKey }: { publicKey: string }) {
-  const [history, setHistory] = useState<any[]>([]);
+interface Transaction {
+  id: string;
+  type: string;
+  amount?: string;
+  asset?: string;
+  from?: string;
+  to?: string;
+  createdAt: string;
+  hash: string;
+}
+
+interface TransactionHistoryProps {
+  publicKey: string;
+}
+
+export default function TransactionHistory({ publicKey }: TransactionHistoryProps) {
+  const [transactions, setTransactions] = useState<Transaction[]>([]);
   const [loading, setLoading] = useState(true);
+  const [refreshing, setRefreshing] = useState(false);
+  const [limit] = useState(10);
+
+  const fetchTransactions = async () => {
+    try {
+      setRefreshing(true);
+      const txs = await stellar.getRecentTransactions(publicKey, limit);
+      setTransactions(txs);
+    } catch (error) {
+      console.error('Error fetching transactions:', error);
+    } finally {
+      setLoading(false);
+      setRefreshing(false);
+    }
+  };
 
   useEffect(() => {
-    async function fetchHistory() {
-      try {
-        setLoading(true);
-        // Fetch recent payments and path payments for this account
-        const payments = await server.payments().forAccount(publicKey).order("desc").limit(10).call();
-        setHistory(payments.records);
-      } catch (err) {
-        console.error("Failed to load history:", err);
-      } finally {
-        setLoading(false);
-      }
-    }
-
     if (publicKey) {
-      fetchHistory();
+      fetchTransactions();
     }
   }, [publicKey]);
 
-  const truncate = (addr: string) => `${addr.slice(0, 4)}...${addr.slice(-4)}`;
+  const formatDate = (dateString: string): string => {
+    const date = new Date(dateString);
+    const now = new Date();
+    const diffMs = now.getTime() - date.getTime();
+    const diffMins = Math.floor(diffMs / 60000);
+    const diffHours = Math.floor(diffMs / 3600000);
+    const diffDays = Math.floor(diffMs / 86400000);
 
-  const getTransactionIcon = (record: any) => {
-    if (record.type === "payment" && record.to === publicKey) {
-      return <ArrowDownLeft className="text-green-500" size={20} />;
-    }
-    if (record.type === "payment" && record.from === publicKey) {
-      return <ArrowUpRight className="text-red-500" size={20} />;
-    }
-    return <ArrowRightLeft className="text-blue-500" size={20} />;
+    if (diffMins < 1) return 'Just now';
+    if (diffMins < 60) return `${diffMins}m ago`;
+    if (diffHours < 24) return `${diffHours}h ago`;
+    if (diffDays < 7) return `${diffDays}d ago`;
+    
+    return date.toLocaleDateString('en-US', { 
+      month: 'short', 
+      day: 'numeric',
+      year: date.getFullYear() !== now.getFullYear() ? 'numeric' : undefined
+    });
   };
 
-  const getTransactionLabel = (record: any) => {
-    if (record.type === "payment") {
-      return record.to === publicKey ? "Received XLM" : "Sent XLM";
-    }
-    return record.type_i === 0 ? "Account Created" : typeof record.type === "string" ? record.type : "Unknown";
+  const formatAddress = (address?: string): string => {
+    if (!address) return 'N/A';
+    return stellar.formatAddress(address, 4, 4);
+  };
+
+  const isOutgoing = (tx: Transaction): boolean => {
+    return tx.from === publicKey;
   };
 
   if (loading) {
     return (
-      <div className="space-y-4 w-full">
-        {[1, 2, 3].map((i) => (
-          <div key={i} className="animate-pulse flex gap-4 p-4 border border-gray-100 dark:border-gray-700 rounded-lg">
-            <div className="w-10 h-10 bg-gray-200 dark:bg-gray-700 rounded-full"></div>
-            <div className="flex-1 space-y-2 py-1">
-              <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-1/4"></div>
-              <div className="h-3 bg-gray-200 dark:bg-gray-700 rounded w-1/2"></div>
+      <Card title="📜 Transaction History">
+        <div className="space-y-3">
+          {[1, 2, 3].map((i) => (
+            <div key={i} className="animate-pulse">
+              <div className="h-20 bg-white/5 rounded-lg"></div>
             </div>
-            <div className="w-16 h-4 bg-gray-200 dark:bg-gray-700 rounded mt-2"></div>
-          </div>
-        ))}
-      </div>
+          ))}
+        </div>
+      </Card>
     );
   }
 
-  if (history.length === 0) {
-    return <div className="text-center text-gray-500 dark:text-gray-400 py-6 w-full">No recent transactions found.</div>;
-  }
-
   return (
-    <div className="space-y-3 w-full animate-in fade-in duration-500">
-      {history.map((record) => (
-        <div
-          key={record.id}
-          className="flex items-center justify-between p-4 border border-gray-100 dark:border-gray-700 bg-gray-50 dark:bg-gray-800/50 rounded-lg hover:shadow-md transition-shadow"
+    <Card>
+      <div className="flex items-center justify-between mb-6">
+        <h2 className="text-2xl font-bold text-white flex items-center gap-2">
+          <FaHistory className="text-purple-400" />
+          Transaction History
+        </h2>
+        <button
+          onClick={fetchTransactions}
+          disabled={refreshing}
+          className="text-blue-400 hover:text-blue-300 disabled:opacity-50 transition-colors"
+          title="Refresh transactions"
         >
-          <div className="flex items-center gap-4">
-            <div className="p-2 bg-white dark:bg-gray-800 rounded-full border border-gray-100 dark:border-gray-700 shadow-sm flex items-center justify-center">
-              {getTransactionIcon(record)}
-            </div>
-            <div>
-              <p className="font-medium text-gray-900 dark:text-gray-100">
-                {getTransactionLabel(record)}
-              </p>
-              <p className="text-xs text-gray-400">
-                {new Date(record.created_at).toLocaleString()}
-              </p>
-            </div>
-          </div>
+          <FaSync className={`text-xl ${refreshing ? 'animate-spin' : ''}`} />
+        </button>
+      </div>
 
-          <div className="text-right">
-            {record.type === "payment" ? (
-              <>
-                <p className={`font-semibold ${record.to === publicKey ? 'text-green-500' : 'text-gray-900 dark:text-white'}`}>
-                  {record.to === publicKey ? '+' : '-'}{parseFloat(record.amount || "0").toFixed(2)} XLM
-                </p>
-                <p className="text-xs text-gray-400">
-                  {record.to === publicKey ? `from ${truncate(record.from)}` : `to ${truncate(record.to)}`}
-                </p>
-              </>
-            ) : record.type_i === 0 ? (
-              // Account created (CreateAccount records have 'starting_balance')
-              <p className="font-semibold text-green-500">
-                +{parseFloat(record.starting_balance || "0").toFixed(2)} XLM
-              </p>
-            ) : null}
-          </div>
+      {transactions.length === 0 ? (
+        <EmptyState
+          icon="📭"
+          title="No Transactions Yet"
+          description="Your transaction history will appear here once you start sending or receiving XLM."
+        />
+      ) : (
+        <div className="space-y-3">
+          {transactions.map((tx) => {
+            const outgoing = isOutgoing(tx);
+            
+            return (
+              <div
+                key={tx.id}
+                className="bg-white/5 hover:bg-white/10 rounded-xl p-4 transition-all border border-white/10 hover:border-white/20"
+              >
+                <div className="flex items-start justify-between mb-3">
+                  <div className="flex items-center gap-3">
+                    <div className={`w-10 h-10 rounded-full flex items-center justify-center ${
+                      outgoing 
+                        ? 'bg-red-500/20 text-red-400' 
+                        : 'bg-green-500/20 text-green-400'
+                    }`}>
+                      {outgoing ? <FaArrowUp /> : <FaArrowDown />}
+                    </div>
+                    <div>
+                      <p className="text-white font-semibold">
+                        {outgoing ? 'Sent' : 'Received'}
+                      </p>
+                      {tx.amount && (
+                        <p className={`text-lg font-bold ${
+                          outgoing ? 'text-red-400' : 'text-green-400'
+                        }`}>
+                          {outgoing ? '-' : '+'}{parseFloat(tx.amount).toFixed(2)} {tx.asset || 'XLM'}
+                        </p>
+                      )}
+                    </div>
+                  </div>
+                  
+                  <a
+                    href={stellar.getExplorerLink(tx.hash, 'tx')}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-blue-400 hover:text-blue-300 text-sm flex items-center gap-1 transition-colors"
+                  >
+                    Details <FaExternalLinkAlt className="text-xs" />
+                  </a>
+                </div>
+
+                <div className="grid grid-cols-2 gap-3 text-sm">
+                  <div>
+                    <p className="text-white/40 text-xs mb-1">From</p>
+                    <p className="text-white/80 font-mono">{formatAddress(tx.from)}</p>
+                  </div>
+                  <div>
+                    <p className="text-white/40 text-xs mb-1">To</p>
+                    <p className="text-white/80 font-mono">{formatAddress(tx.to)}</p>
+                  </div>
+                </div>
+
+                <div className="flex justify-between items-center mt-3 pt-3 border-t border-white/10">
+                  <p className="text-white/40 text-xs">{formatDate(tx.createdAt)}</p>
+                  <p className="text-white/30 text-xs font-mono">{tx.hash.slice(0, 12)}...</p>
+                </div>
+              </div>
+            );
+          })}
         </div>
-      ))}
-    </div>
+      )}
+
+      {transactions.length > 0 && (
+        <div className="mt-4 text-center">
+          <p className="text-white/40 text-sm">
+            Showing last {transactions.length} transaction{transactions.length !== 1 ? 's' : ''}
+          </p>
+        </div>
+      )}
+    </Card>
   );
 }
+

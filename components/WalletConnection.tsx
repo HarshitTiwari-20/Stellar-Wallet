@@ -37,10 +37,9 @@ export default function WalletConnection({ onConnect, onDisconnect }: WalletConn
       setPublicKey(key);
       setIsConnected(true);
       onConnect(key);
-    } catch (error: unknown) {
+    } catch (error: any) {
       console.error('Connection error:', error);
-      const err = error as Error;
-      alert(`Failed to connect wallet:\n${err.message}`);
+      alert(`Failed to connect wallet:\n${error.message}`);
     } finally {
       setLoading(false);
     }
@@ -65,7 +64,7 @@ export default function WalletConnection({ onConnect, onDisconnect }: WalletConn
         <p className="text-white/70 mb-6">
           Connect your Stellar wallet to view your balance and make transactions.
         </p>
-
+        
         <button
           onClick={handleConnect}
           disabled={loading}
@@ -99,7 +98,7 @@ export default function WalletConnection({ onConnect, onDisconnect }: WalletConn
             <div>✓ More...</div>
           </div>
           <p className="text-white/50 text-xs mt-3">
-            Click &quot;Connect Wallet&quot; to choose your preferred wallet
+            Click "Connect Wallet" to choose your preferred wallet
           </p>
         </div>
       </Card>
