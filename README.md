@@ -1,25 +1,4 @@
-# 🌟 Stellar Frontend Starter Template
 
-> **Build beautiful payment dashboards on Stellar blockchain - Focus only on UI/UX!**
-
-All blockchain logic is already implemented with [Stellar Wallets Kit](https://github.com/Creit-Tech/Stellar-Wallets-Kit). Your job is to create an amazing user experience.
-
-[![Stellar](https://img.shields.io/badge/Stellar-Testnet-blue)](https://stellar.org)
-[![Next.js](https://img.shields.io/badge/Next.js-14-black)](https://nextjs.org)
-[![TypeScript](https://img.shields.io/badge/TypeScript-5.4-blue)](https://www.typescriptlang.org/)
-[![Tailwind CSS](https://img.shields.io/badge/Tailwind-3.4-38bdf8)](https://tailwindcss.com)
-
-## 🎯 What's This?
-
-This is a **starter template** for building Stellar payment dashboards. Perfect for:
-- 🎓 Learning Stellar blockchain development
-- 🚀 Building your first blockchain app
-- 💼 Creating payment interfaces quickly
-- 🏆 Participating in hackathons
-
-**No blockchain knowledge required!** All the complex blockchain logic is abstracted away in `lib/stellar-helper.ts` (DO NOT MODIFY). You only need to focus on creating beautiful UI/UX.
-
----
 
 ## ✨ Features
 
