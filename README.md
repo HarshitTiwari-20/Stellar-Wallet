@@ -13,7 +13,7 @@ A complete, modern web application for interacting with the Stellar blockchain T
 
 ## ✨ What's Inside?
 
-<img width="1008" height="747" alt="Dashboard Screenshot" src="https://github.com/HarshitTiwari-20/Stellar-Wallet/blob/main/public/Screenshot%20from%202026-02-22%2001-21-45.png" />
+<img width="1008" height="900" alt="Dashboard Screenshot" src="https://github.com/HarshitTiwari-20/Stellar-Wallet/blob/main/public/Screenshot%20from%202026-02-22%2001-21-45.png" />
 
 ### 🏦 Complete Wallet & Asset Management
 * **Seamless Connection**: Built-in support for Freighter and other major Stellar wallets via [Stellar Wallets Kit](https://github.com/Creit-Tech/Stellar-Wallets-Kit).
